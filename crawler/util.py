@@ -134,8 +134,6 @@ def handle_activity(package_name):
 class Check_app():
     @staticmethod
     def calculate_coverage(subject, ins_name):
-        #
-        print('************testing ' + subject.package + 'using ' + subject.suit +'************')
         os.system('adb -s ' + subject.serial + ' shell logcat -c')
         current_instrument = instruments.instruments[ins_name](subject)
         current_instrument.run()
@@ -161,7 +159,7 @@ class Check_app():
                         #执行'http://127.0.0.1:5700/save'
                         current_instrument.save_graph()
                     if not current_instrument.is_alive():
-                        print('instrument stop')
+                        #print('instrument stop')
                         if ins_name == 'monkey' :
                             # 记录crash
                             fk = open(subject.dir + '/' + subject.package + '_' + subject.suit + '_time_coverage.txt', 'a+')

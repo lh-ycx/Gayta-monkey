@@ -114,7 +114,7 @@ if __name__ == "__main__":
                 logger.info('skip finished task: ' + apk)
                 continue
 
-            logger.info('start task:')
+            logger.info('start testing ' + apk + ' using ' + suit)
             subject = App(apk, serial, suit)
             try:
                 test_coverage(subject, suit)
