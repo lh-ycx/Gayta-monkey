@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: com.neovisionaries:nv-websocket-client:2.3">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.neovisionaries/nv-websocket-client/2.3/693289a243a778fafb081365d47b19f53031aded/nv-websocket-client-2.3.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.neovisionaries/nv-websocket-client/2.3/de4ae4f20a4649cc9f9a63fa8b27bb79c9eb485/nv-websocket-client-2.3-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
