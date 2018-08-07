@@ -9,43 +9,47 @@ import timeout_decorator
 import time
 import requests
 
+from util import error_msg
+from util import logger
+from util import usage
+from util import Check_app
 from settings import paladin_dir, apk_dir
 from settings import defaultsuit
 from settings import is_open_source
-from util import error_msg
 from Application import App
-from util import Check_app
+from instruments import Paladin_s
 
 spider_mode = False
-
-# logger
-logger = logging.getLogger("crawler logger")
-logger.setLevel(logging.DEBUG)
-fh = logging.FileHandler("spam.log")
-fh.setLevel(logging.DEBUG)
-ch = logging.StreamHandler()
-ch.setLevel(logging.INFO)
-formatter = logging.Formatter(
-    '[%(asctime)s] [%(levelname)s] %(message)s', '%Y-%m-%d %H:%M:%S')
-ch.setFormatter(formatter)
-fh.setFormatter(formatter)
-logger.addHandler(ch)
-logger.addHandler(fh)
-
-
-def usage():
-    return
 
 
 suit = defaultsuit
 serial = ''
 
-if __name__ == "__main__":
 
+
+@timeout_decorator.timeout(10800)
+def test_coverage(subject, suit):
+    os.system('adb -s ' + subject.serial + ' install ' + subject.apkpath)
+    Check_app.calculate_coverage(subject, suit)     #subject = App(apk, serial, suit)
+
+
+def crawl(subject, target): #subject = App(apk, serial, suit)
+    os.system('adb -s ' + subject.serial + ' install ' + subject.apkpath)
+    paladin_s = Paladin_s(subject, target)
+    paladin_s.run()
+    time.sleep(paladin_s.wait)
+    while(True):
+        time.sleep(30)
+        if not paladin_s.is_alive():
+            paladin_s.stop()
+
+
+if __name__ == "__main__":
     opts, args = getopt.getopt(sys.argv[1:], "s:t:hc")
     for op, value in opts:
         if op == "-c":
             spider_mode = True
+            suit = 'paladin-s'
             logger.info('spider mode open')
         elif op == '-s':
             serial = value
@@ -86,10 +90,12 @@ if __name__ == "__main__":
         for task in tasks:
             if task in finished:
                 logger.info(
-                    "[spider mode] skip finished task:("+task['PACKAGE']+","+task['TARGET_ACTIVITY'] + ')')
+                    "[spider mode] skip finished task:(PACKAGE:"+task['PACKAGE']+",TARGET_ACTIVITY:"+task['TARGET_ACTIVITY'] + ')')
                 continue
             logger.info(
-                "[spider mode] start task:("+task['PACKAGE']+","+task['TARGET_ACTIVITY'] + ')')
+                "[spider mode] start task:(PACKAGE:"+task['PACKAGE']+",TARGET_ACTIVITY:"+task['TARGET_ACTIVITY'] + ')')
+            subject = App(task['PACKAGE']+'.apk', serial, suit)
+            crawl(subject, task['TARGET_ACTIVITY'])
 
     else:
         # build task
@@ -134,7 +140,3 @@ if __name__ == "__main__":
             f.close()
 
 
-@timeout_decorator.timeout(10800)
-def test_coverage(subject, suit):
-    os.system('adb -s ' + subject.serial + ' install ' + subject.apkpath)
-    Check_app.calculate_coverage(subject, suit)     #subject = App(apk, serial, suit)

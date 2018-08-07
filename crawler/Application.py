@@ -11,6 +11,7 @@ from settings import emma_dir
 
 class App():
     def __init__(self, apk, serial, suit):
+        from util import logger
         self.path = apk_dir
         #count emma file
         self.item = 0

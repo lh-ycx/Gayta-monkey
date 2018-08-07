@@ -64,6 +64,59 @@ class BaseInstrument():
         #子类实现
         pass
 
+
+class Paladin_s(BaseInstrument):
+    def __init__(self, app, target):
+        BaseInstrument.__init__(self, app)
+        self.target_activity = target
+        self.od = os.getcwd()
+        # paladin所在目录
+        self.wd = paladin_dir
+
+    def run(self):
+        # 读取json文件，改掉package和target_activity，然后运行
+        os.chdir(self.wd)
+        config_path = self.wd + 'config.json'
+        from util import logger
+        if(os.path.isfile(config_path)) :
+            config = json.load(open(config_path))
+            config["DEVICES"][0]["SERIAL"] = self.app.serial    #序列号
+            config["PACKAGE"] = self.app.package                #package
+            config["TARGET_ACTIVITY"] = self.target_activity
+            json.dump(config, open(config_path,'w'), indent = 4)
+            logger.info("paladin-s config complete, start testing...")
+            self.instance = RunCmd(['java', '-jar', 'paladin-1.0.jar','-s'])
+            self.instance.start_run()
+        else:
+            logger.error("error! can not find config.json in :" + config_path)
+    
+    def stop(self):
+        self.clean()
+        self.instance.stop_run()
+    
+    def is_alive(self):
+        serial = self.app.serial
+        result = os.popen("curl http://127.0.0.1:5700/finish?serial="+serial).read()
+        return result == 'no'
+
+    def save_graph(self):
+        result = os.popen("curl http://127.0.0.1:5700/save").read()
+        package = self.app.package
+        old_dir = paladin_dir + "graph.json"
+        new_dir = paladin_dir + "output/" + package + "/graph-" + package + ".json"
+        time.sleep(3)
+        result = os.popen("mv " + old_dir + " " + new_dir).read()
+        print("save graph")
+
+    def clean(self):
+        # stop()会调用clean()
+        print("clean!!")
+        graph_dir = paladin_dir + "graph.json"
+        stacks_dir = paladin_dir + "stacks.json"
+        result = os.popen("rm -f " + graph_dir).read()
+        result = os.popen("rm -f " + stacks_dir).read()
+        
+
 class Paladin(BaseInstrument):
     def __init__(self, app):
         BaseInstrument.__init__(self, app)
@@ -275,7 +328,7 @@ class Sapienz(BaseInstrument):
 #instruments = {'monkey' : monkey, 'sapienz' : sapienz, 
                #'droidbot' : droidbot, 'stoat' : stoat}
 
-instruments = {'monkey' : Monkey, 'droidbot' : Droidbot, 'stoat' : Stoat, 'sapienz' : Sapienz, 'puma' : PUMA, 'paladin' : Paladin } 
+instruments = {'monkey' : Monkey, 'droidbot' : Droidbot, 'stoat' : Stoat, 'sapienz' : Sapienz, 'puma' : PUMA, 'paladin' : Paladin, 'paladin-s': Paladin_s } 
 
 
 

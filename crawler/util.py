@@ -1,5 +1,9 @@
 # coding=utf-8
 
+from settings import is_open_source
+from settings import apk_dir
+from Application import App
+
 import os
 import re
 import time
@@ -10,15 +14,31 @@ import threading
 import instruments
 import datetime
 import timeout_decorator
-from settings import is_open_source
-from settings import apk_dir
-from Application import App
+import logging
 
+# logger
+logger = logging.getLogger("")
+logger.setLevel(logging.DEBUG)
+fh = logging.FileHandler("spam.log")
+fh.setLevel(logging.DEBUG)
+ch = logging.StreamHandler()
+ch.setLevel(logging.INFO)
+formatter = logging.Formatter(
+    '[%(asctime)s] [%(levelname)s] %(message)s', '%Y-%m-%d %H:%M:%S')
+ch.setFormatter(formatter)
+fh.setFormatter(formatter)
+logger.addHandler(ch)
+logger.addHandler(fh)
 
+# error message
 def error_msg(msg):
     print("================= error =================")
     print(msg)
     print("================= ===== =================")
+
+
+def usage():
+    return
 
 class Method_handler():
     collecting = False
