@@ -1,126 +1,19 @@
-[2018-08-07 09:59:47] [INFO] spider mode open
-[2018-08-07 09:59:47] [INFO] [spider mode] start task:(PACKAGE:com.tmall.wireless,TARGET_ACTIVITY:TMItemDetailsActivity)
-[2018-08-07 10:01:11] [INFO] spider mode open
-[2018-08-07 10:01:11] [INFO] [spider mode] start task:(PACKAGE:com.tmall.wireless,TARGET_ACTIVITY:TMItemDetailsActivity)
-[2018-08-07 10:01:39] [INFO] spider mode open
-[2018-08-07 10:01:39] [INFO] [spider mode] start task:(PACKAGE:com.tmall.wireless,TARGET_ACTIVITY:TMItemDetailsActivity)
-[2018-08-07 10:02:20] [INFO] spider mode open
-[2018-08-07 10:02:20] [INFO] [spider mode] start task:(PACKAGE:com.tmall.wireless,TARGET_ACTIVITY:TMItemDetailsActivity)
-[2018-08-07 10:03:54] [INFO] spider mode open
-[2018-08-07 10:03:54] [INFO] [spider mode] start task:(PACKAGE:com.tmall.wireless,TARGET_ACTIVITY:TMItemDetailsActivity)
-[2018-08-07 10:05:03] [INFO] spider mode open
-[2018-08-07 10:05:03] [INFO] [spider mode] start task:(PACKAGE:com.tmall.wireless,TARGET_ACTIVITY:TMItemDetailsActivity)
-[2018-08-07 10:06:21] [INFO] spider mode open
-[2018-08-07 10:06:21] [INFO] [spider mode] start task:(PACKAGE:com.tmall.wireless,TARGET_ACTIVITY:TMItemDetailsActivity)
-[2018-08-07 10:06:21] [ERROR] error! can not find config.json in :C:/Users/ycx/Desktop/test-paladinconfig.json
-[2018-08-07 10:08:14] [INFO] spider mode open
-[2018-08-07 10:08:14] [INFO] [spider mode] start task:(PACKAGE:com.tmall.wireless,TARGET_ACTIVITY:TMItemDetailsActivity)
-[2018-08-07 10:08:15] [INFO] paladin-s config complete, start testing...
-[2018-08-07 10:10:04] [INFO] spider mode open
-[2018-08-07 10:10:04] [INFO] [spider mode] start task:(PACKAGE:com.tmall.wireless,TARGET_ACTIVITY:TMItemDetailsActivity)
-[2018-08-07 10:10:06] [INFO] paladin-s config complete, start testing...
-[2018-08-07 10:12:30] [INFO] spider mode open
-[2018-08-07 10:12:30] [INFO] [spider mode] start task:(PACKAGE:com.tmall.wireless,TARGET_ACTIVITY:TMItemDetailsActivity)
-[2018-08-07 10:12:31] [INFO] paladin-s config complete, start testing...
-[2018-08-07 10:13:05] [INFO] spider mode open
-[2018-08-07 10:13:05] [INFO] [spider mode] start task:(PACKAGE:com.tmall.wireless,TARGET_ACTIVITY:TMItemDetailsActivity)
-[2018-08-07 10:13:05] [INFO] 1
-[2018-08-07 10:13:05] [INFO] 2
-[2018-08-07 10:13:05] [INFO] paladin-s config complete, start testing...
-[2018-08-07 10:17:23] [INFO] spider mode open
-[2018-08-07 10:17:23] [INFO] [spider mode] start task:(PACKAGE:com.tmall.wireless,TARGET_ACTIVITY:TMItemDetailsActivity)
-[2018-08-07 10:17:23] [INFO] 1
-[2018-08-07 10:17:23] [INFO] 1
-[2018-08-07 10:17:23] [INFO] 2
-[2018-08-07 10:17:23] [INFO] 3
-[2018-08-07 10:17:23] [INFO] 2
-[2018-08-07 10:17:23] [INFO] paladin-s config complete, start testing...
-[2018-08-07 10:17:50] [INFO] spider mode open
-[2018-08-07 10:17:50] [INFO] [spider mode] start task:(PACKAGE:com.tmall.wireless,TARGET_ACTIVITY:TMItemDetailsActivity)
-[2018-08-07 10:17:50] [INFO] 1
-[2018-08-07 10:17:50] [INFO] 2
-[2018-08-07 10:17:50] [INFO] 3
-[2018-08-07 10:17:50] [INFO] paladin-s config complete, start testing...
-[2018-08-07 10:20:25] [INFO] spider mode open
-[2018-08-07 10:20:25] [INFO] [spider mode] start task:(PACKAGE:com.tmall.wireless,TARGET_ACTIVITY:TMItemDetailsActivity)
-[2018-08-07 10:20:25] [INFO] 1
-[2018-08-07 10:20:25] [INFO] 4
-[2018-08-07 10:20:25] [INFO] 5
-[2018-08-07 10:20:25] [INFO] 2
-[2018-08-07 10:20:25] [INFO] 6
-[2018-08-07 10:20:25] [INFO] 7
-[2018-08-07 10:20:25] [INFO] 3
-[2018-08-07 10:20:25] [INFO] paladin-s config complete, start testing...
-[2018-08-07 10:21:44] [INFO] spider mode open
-[2018-08-07 10:21:44] [INFO] [spider mode] start task:(PACKAGE:com.tmall.wireless,TARGET_ACTIVITY:TMItemDetailsActivity)
-[2018-08-07 10:21:44] [INFO] 1
-[2018-08-07 10:21:44] [INFO] 4
-[2018-08-07 10:21:44] [INFO] aapt d badging C:/Users/ycx/Desktop/test-paladin/apks/com.tmall.wireless.apk | grep package
-[2018-08-07 10:21:44] [INFO] 5
-[2018-08-07 10:21:44] [INFO] 2
-[2018-08-07 10:21:44] [INFO] 6
-[2018-08-07 10:21:44] [INFO] aapt d badging C:/Users/ycx/Desktop/test-paladin/apks/com.tmall.wireless.apk | grep launchable
-[2018-08-07 10:21:44] [INFO] 7
-[2018-08-07 10:21:44] [INFO] 3
-[2018-08-07 10:21:44] [INFO] paladin-s config complete, start testing...
-[2018-08-07 10:23:32] [INFO] spider mode open
-[2018-08-07 10:23:32] [INFO] [spider mode] start task:(PACKAGE:com.tmall.wireless,TARGET_ACTIVITY:TMItemDetailsActivity)
-[2018-08-07 10:23:32] [INFO] 1
-[2018-08-07 10:23:32] [INFO] 4
-[2018-08-07 10:23:32] [INFO] aapt d badging C:/Users/ycx/Desktop/test-paladin/apks/com.tmall.wireless.apk | grep package
-[2018-08-07 10:23:32] [INFO] 5
-[2018-08-07 10:23:32] [INFO] 2
-[2018-08-07 10:23:32] [INFO] 6
-[2018-08-07 10:23:32] [INFO] aapt d badging C:/Users/ycx/Desktop/test-paladin/apks/com.tmall.wireless.apk | grep launchable
-[2018-08-07 10:23:32] [INFO] 7
-[2018-08-07 10:23:32] [INFO] 3
-[2018-08-07 10:23:32] [INFO] +++
-[2018-08-07 10:23:32] [INFO] ---
-[2018-08-07 10:23:32] [INFO] paladin-s config complete, start testing...
-[2018-08-07 10:23:50] [INFO] spider mode open
-[2018-08-07 10:23:50] [INFO] [spider mode] start task:(PACKAGE:com.tmall.wireless,TARGET_ACTIVITY:TMItemDetailsActivity)
-[2018-08-07 10:23:50] [INFO] 1
-[2018-08-07 10:23:50] [INFO] 4
-[2018-08-07 10:23:50] [INFO] aapt d badging C:/Users/ycx/Desktop/test-paladin/apks/com.tmall.wireless.apk | grep package
-[2018-08-07 10:23:50] [INFO] 5
-[2018-08-07 10:23:50] [INFO] 2
-[2018-08-07 10:23:50] [INFO] 6
-[2018-08-07 10:23:50] [INFO] aapt d badging C:/Users/ycx/Desktop/test-paladin/apks/com.tmall.wireless.apk | grep launchable
-[2018-08-07 10:23:50] [INFO] 7
-[2018-08-07 10:23:50] [INFO] 3
-[2018-08-07 10:23:50] [INFO] ---
-[2018-08-07 10:23:50] [INFO] +++
-[2018-08-07 10:23:50] [INFO] paladin-s config complete, start testing...
-[2018-08-07 10:24:34] [INFO] spider mode open
-[2018-08-07 10:24:34] [INFO] [spider mode] start task:(PACKAGE:com.tmall.wireless,TARGET_ACTIVITY:TMItemDetailsActivity)
-[2018-08-07 10:24:34] [INFO] 1
-[2018-08-07 10:24:34] [INFO] 4
-[2018-08-07 10:24:34] [INFO] aapt d badging C:/Users/ycx/Desktop/test-paladin/apks/com.tmall.wireless.apk | grep package
-[2018-08-07 10:24:34] [INFO] 5
-[2018-08-07 10:24:34] [INFO] 2
-[2018-08-07 10:24:34] [INFO] 6
-[2018-08-07 10:24:34] [INFO] aapt d badging C:/Users/ycx/Desktop/test-paladin/apks/com.tmall.wireless.apk | grep launchable
-[2018-08-07 10:24:34] [INFO] 7
-[2018-08-07 10:24:34] [INFO] 3
-[2018-08-07 10:24:34] [INFO] adb -s  install C:/Users/ycx/Desktop/test-paladin/apks/com.tmall.wireless.apk
-[2018-08-07 10:24:34] [INFO] +++
-[2018-08-07 10:24:34] [INFO] paladin-s config complete, start testing...
-[2018-08-07 10:26:40] [INFO] spider mode open
-[2018-08-07 10:26:40] [INFO] read serial setting: 192.168.135.101:5555
-[2018-08-07 10:26:40] [INFO] [spider mode] start task:(PACKAGE:com.tmall.wireless,TARGET_ACTIVITY:TMItemDetailsActivity)
-[2018-08-07 10:26:40] [INFO] 1
-[2018-08-07 10:26:40] [INFO] 4
-[2018-08-07 10:26:40] [INFO] aapt d badging C:/Users/ycx/Desktop/test-paladin/apks/com.tmall.wireless.apk | grep package
-[2018-08-07 10:26:40] [INFO] 5
-[2018-08-07 10:26:40] [INFO] 2
-[2018-08-07 10:26:40] [INFO] 6
-[2018-08-07 10:26:40] [INFO] aapt d badging C:/Users/ycx/Desktop/test-paladin/apks/com.tmall.wireless.apk | grep launchable
-[2018-08-07 10:26:40] [INFO] 7
-[2018-08-07 10:26:40] [INFO] 3
-[2018-08-07 10:26:41] [INFO] adb -s 192.168.135.101:5555 install C:/Users/ycx/Desktop/test-paladin/apks/com.tmall.wireless.apk
-[2018-08-07 10:26:53] [INFO] +++
-[2018-08-07 10:26:53] [INFO] paladin-s config complete, start testing...
-[2018-08-07 10:31:22] [INFO] spider mode open
-[2018-08-07 10:31:22] [INFO] read serial setting: 192.168.135.101:5555
-[2018-08-07 10:31:22] [INFO] [spider mode] start task:(PACKAGE:com.tmall.wireless,TARGET_ACTIVITY:TMItemDetailsActivity)
-[2018-08-07 10:31:39] [INFO] paladin-s config complete, start testing...
+[2018-08-07 18:27:49] [INFO] spider mode open
+[2018-08-07 18:27:49] [INFO] read serial setting: 192.168.135.101:5555
+[2018-08-07 18:27:49] [INFO] [spider mode] start task:(PACKAGE:com.tmall.wireless,TARGET_ACTIVITY:TMItemDetailsActivity)
+[2018-08-07 18:27:56] [INFO] paladin-s config complete, start testing...
+[2018-08-07 18:28:20] [INFO] spider mode open
+[2018-08-07 18:28:20] [INFO] read serial setting: 192.168.135.101:5555
+[2018-08-07 18:28:20] [INFO] [spider mode] start task:(PACKAGE:com.tmall.wireless,TARGET_ACTIVITY:TMItemDetailsActivity)
+[2018-08-07 18:28:27] [INFO] paladin-s config complete, start testing...
+[2018-08-07 18:31:25] [INFO] spider mode open
+[2018-08-07 18:31:25] [INFO] read serial setting: 192.168.135.101:5555
+[2018-08-07 18:31:25] [INFO] [spider mode] start task:(PACKAGE:com.tmall.wireless,TARGET_ACTIVITY:TMItemDetailsActivity)
+[2018-08-07 18:31:46] [INFO] paladin-s config complete, start testing...
+[2018-08-07 21:25:27] [INFO] spider mode open
+[2018-08-07 21:25:27] [INFO] read serial setting: 192.168.135.101:5555
+[2018-08-07 21:25:27] [INFO] [spider mode] start task:(PACKAGE:com.tmall.wireless,TARGET_ACTIVITY:TMItemDetailsActivity)
+[2018-08-07 21:25:52] [INFO] spider mode open
+[2018-08-07 21:25:52] [INFO] read serial setting: 192.168.135.101:5555
+[2018-08-07 21:25:52] [INFO] [spider mode] start task:(PACKAGE:com.tmall.wireless,TARGET_ACTIVITY:TMItemDetailsActivity)
+[2018-08-07 21:26:04] [INFO] paladin-s config complete, start testing...

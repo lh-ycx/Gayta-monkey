@@ -41,6 +41,7 @@ def crawl(subject, target): #subject = App(apk, serial, suit)
     while(True):
         time.sleep(30)
         if not paladin_s.is_alive():
+            logger.info("check if is alive")
             paladin_s.stop()
 
 
