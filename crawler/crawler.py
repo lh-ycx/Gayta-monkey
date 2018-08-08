@@ -13,6 +13,7 @@ from util import error_msg
 from util import logger
 from util import usage
 from util import Check_app
+from util import handle_page
 from settings import paladin_dir, apk_dir
 from settings import defaultsuit
 from settings import is_open_source
@@ -26,23 +27,46 @@ suit = defaultsuit
 serial = ''
 
 
-
 @timeout_decorator.timeout(10800)
 def test_coverage(subject, suit):
     os.system('adb -s ' + subject.serial + ' install ' + subject.apkpath)
-    Check_app.calculate_coverage(subject, suit)     #subject = App(apk, serial, suit)
+    # subject = App(apk, serial, suit)
+    Check_app.calculate_coverage(subject, suit)
 
 
-def crawl(subject, target): #subject = App(apk, serial, suit)
+def crawl(subject, target):  # subject = App(apk, serial, suit)
     os.system('adb -s ' + subject.serial + ' install ' + subject.apkpath)
     paladin_s = Paladin_s(subject, target)
     paladin_s.run()
     time.sleep(paladin_s.wait)
+    count = 0
     while(True):
-        time.sleep(30)
-        if not paladin_s.is_alive():
-            logger.info("check if is alive")
+        time.sleep(60)
+        count += 1
+        logger.info("[spider mode] handling pages...")
+        handle_page(subject.getPackage())
+        
+        # if count % 6 == 0 and not paladin_s.is_alive():
+        if count == 10:
+            logger.info("task is over")
             paladin_s.stop()
+            finished = {}
+            if os.path.isfile(apk_dir + '/finished-s.json') :
+                f = open(apk_dir + '/finished-s.json')
+                content = f.read()
+                f.close()
+                if content:
+                    finished = json.loads(content)
+                else :
+                    finished = {"FINISHED":[]}
+            else:
+                finished = {"FINISHED":[]}
+            finished['FINISHED'].append({"PACKAGE": subject.getPackage(),
+                                            "TARGET_ACTIVITY": target})
+            f = open(apk_dir + '/finished-s.json', 'w')
+            json.dump(finished,f)
+            f.close()
+            break
 
 
 if __name__ == "__main__":
@@ -83,9 +107,11 @@ if __name__ == "__main__":
         # build finished
         if (os.path.isfile(apk_dir + '/finished-s.json')):
             f = open(apk_dir + '/finished-s.json')
-            finished = json.load(f)
-            f.close()
-            finished = finished['FINISHED']
+            content = f.read()
+            if(content):
+                finished = json.loads(content)
+                f.close()
+                finished = finished['FINISHED']
 
         # run
         for task in tasks:
@@ -139,5 +165,3 @@ if __name__ == "__main__":
             f = open(apk_dir + '/finished_' + suit + '.txt', 'a+')
             f.write(subject.package + '\n')
             f.close()
-
-

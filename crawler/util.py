@@ -2,6 +2,8 @@
 
 from settings import is_open_source
 from settings import apk_dir
+from settings import elastic_url
+from settings import paladin_dir
 from Application import App
 
 import os
@@ -15,6 +17,8 @@ import instruments
 import datetime
 import timeout_decorator
 import logging
+import re
+import json
 
 # logger
 logger = logging.getLogger("")
@@ -195,6 +199,52 @@ class Check_app():
             current_instrument.stop()
             raise timeout_decorator.timeout_decorator.TimeoutError('timeout')
 
+
+def handle_page(package):
+    uploaded = []
+    toupload = []
+    output_dir = paladin_dir + 'output/' + package + '/'
+    if (os.path.isfile(output_dir+"uploaded.txt")):
+        f = open((output_dir + "uploaded.txt") ,'r')
+        content = f.read()
+        uploaded = content.split('\n')
+        f.close()
+    
+    if(os.path.isdir(output_dir)):
+        output = os.popen('ls ' + output_dir).readlines()
+        for i in output :
+            i = i.strip()
+            if re.match('^-?[0-9]*.json$', i):
+                toupload.append(i)
+    else :
+        os.mkdir(output_dir)
+    
+    for i in toupload:
+        if i not in uploaded:
+            f = open((output_dir + i) ,'r')
+            data = f.read()
+            f.close()
+            logger.info("before request")
+            response = requests.post(elastic_url, json=json.loads(data))
+            logger.info("after request")
+            jresponse = json.loads(response.text)
+            if 'result' in jresponse and jresponse['result'] == 'created':
+                logger.info('succeed in uploading '+ i)
+                uploaded.append(i)
+            else: 
+                logger.error('failed in uploading ' + i)
+                error_msg('failed in uploading ' + i)
+                raise RuntimeError('uploading error')
+
+    f = open((output_dir + "uploaded.txt") ,'w')
+    for i in uploaded:
+        f.write(i)
+        if(i):
+            f.write('\n')
+    f.close()
+    logger.info('finish handling pages')
+    return
+            
 
         
 

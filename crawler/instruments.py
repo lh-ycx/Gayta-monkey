@@ -97,6 +97,9 @@ class Paladin_s(BaseInstrument):
     def is_alive(self):
         serial = self.app.serial
         result = os.popen("curl http://127.0.0.1:5700/finish?serial="+serial).read()
+        #print('======================')
+        #print("result:",result)
+        #print('======================')
         return result == 'no'
 
     def save_graph(self):
@@ -110,7 +113,7 @@ class Paladin_s(BaseInstrument):
 
     def clean(self):
         # stop()会调用clean()
-        print("clean!!")
+        # print("clean!!")
         graph_dir = paladin_dir + "graph.json"
         stacks_dir = paladin_dir + "stacks.json"
         result = os.popen("rm -f " + graph_dir).read()

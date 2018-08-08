@@ -8,3 +8,4 @@ src_dir = "static/src/"
 paladin_dir = 'C:/Users/ycx/Desktop/test-paladin/'
 apk_dir = 'C:/Users/ycx/Desktop/test-paladin/apks'
 defaultsuit = 'paladin'
+elastic_url = 'http://localhost:9200/test/simpletree'
