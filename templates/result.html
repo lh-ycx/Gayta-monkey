@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="/static/css/bootstrap.css">
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+    <script src="/static/js/bootstrap.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
+    <script src="/static/js/jquery.js"></script>
+    <script src="/static/js/jquery-1.8.3.min.js"></script>
+    <title> {{ searchq }} </title>
+    <style>
+        #container {
+            float: none;
+            margin: 0 auto;
+        }
+
+        #icon {
+            width: 120px;
+            display: block;
+            margin: 0 auto;
+        }
+
+        #searchbar {
+            margin: 0 auto;
+            float: none;
+            margin-top: 30px;
+        }
+
+        img {
+            width: 50%;
+            height: 50%;
+        }
+
+        h4 {
+            width: 90%;
+            word-break: break-all;
+            text-align: center;
+        }
+
+        .center {
+            display: block;
+            position: absolute;
+            width: 160px;
+            margin: 0 auto;
+            top: 300px;
+            left: 35px;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .thumbnail {
+            position: relative;
+            margin-top: 20px;
+            height : 360px;
+        }
+    </style>
+</head>
+
+
+<body>
+    <div class="row">
+        <div id="container">
+            <img id="icon" src="/static/src/img/icon.png" alt="">
+            <div class="col-lg-6" id="searchbar">
+                <div class="input-group input-group-lg">
+                    <input id = "search_input" type="text" class="form-control" placeholder= {{ searchq }}>
+                    <span class="input-group-btn">
+                        <button  id = "search_btn" class="btn btn-primary" type="button">Search</button>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        {% for result in results %}
+        <div class="col-sm-6 col-md-4 col-lg-2">
+            <div class="thumbnail">
+                <img src={{ "../" + src_dir + result["source"]["PACKAGE"] + "/" 
+                + result["source"]["ACTIVITY"] + "_" 
+                + result["source"]["STRUCTURE_HASH"] + "_" 
+                + result["source"]["CONTENT_HASH"] + ".png" }} alt="...">
+                <div class="caption">
+                    <h4>{{ result["source"]["PACKAGE"] }}</h4>
+                    <p>Similarity: {{ result["score"] }}</p>
+                    <p class="center">
+                        <a href = {{ "../app/" + result["source"]["PACKAGE"] + "/" 
+                        + result["source"]["ACTIVITY"] + "_" 
+                        + result["source"]["STRUCTURE_HASH"] + "_" 
+                        + result["source"]["CONTENT_HASH"] }} class="btn btn-primary" role="button">Check</a>
+                        <a href="#" class="btn btn-default" role="button">Deep link</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <script>
+        $("#search_btn").click(function() {
+            var searchq = $("#search_input").val()
+            console.log("search_q:" + searchq)
+            window.open("http://127.0.0.1:5000/search/" + searchq)
+        })
+    </script>
+</body>
+
+</html>

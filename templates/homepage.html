@@ -40,14 +40,22 @@
             <img id="icon" src="/static/src/img/icon.png" alt="">
             <div class="col-lg-6" id="searchbar">
                 <div class="input-group input-group-lg">
-                    <input type="text" class="form-control" placeholder="Search for...">
+                    <input id="search_input" type="text" class="form-control" placeholder="search for...">
                     <span class="input-group-btn">
-                        <button class="btn btn-primary" type="button">Search</button>
+                        <button id="search_btn" class="btn btn-primary" type="button">Search</button>
                     </span>
                 </div>
             </div>
         </div>
     </div>
+
+    <script>
+        $("#search_btn").click(function () {
+            var searchq = $("#search_input").val()
+            console.log("search_q:" + searchq)
+            window.open("http://127.0.0.1:5000/search/" + searchq)
+        })
+    </script>
 </body>
 
 </html>

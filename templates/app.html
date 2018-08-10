@@ -10,8 +10,7 @@
     <script src="/static/js/bootstrap.js"></script>
     <script src="/static/js/bootstrap.min.js"></script>
     <script src="/static/js/jquery.js"></script>
-    <script src="/static/js/jquery-1.8.3.min.js"></script>
-    {% if filelist %}
+    <script src="/static/js/jquery-1.8.3.min.js"></script> {% if filelist %}
     <title> {{filelist[0][0]}} </title>
     {% endif %}
     <style>
@@ -45,8 +44,11 @@
 
         .center {
             display: block;
+            position: absolute;
             width: 160px;
             margin: 0 auto;
+            top: 300px;
+            left: 35px;
         }
 
         .hidden {
@@ -54,7 +56,9 @@
         }
 
         .thumbnail {
+            position: relative;
             margin-top: 20px;
+            height : 360px;
         }
     </style>
 </head>
@@ -66,14 +70,22 @@
             <img id="icon" src="/static/src/img/icon.png" alt="">
             <div class="col-lg-6" id="searchbar">
                 <div class="input-group input-group-lg">
-                    <input type="text" class="form-control" placeholder="Search for...">
+                    <input id="search_input" type="text" class="form-control" placeholder="search for...">
                     <span class="input-group-btn">
-                        <button class="btn btn-primary" type="button">Search</button>
+                        <button id="search_btn" class="btn btn-primary" type="button">Search</button>
                     </span>
                 </div>
             </div>
         </div>
     </div>
+
+    <script>
+        $("#search_btn").click(function () {
+            var searchq = $("#search_input").val()
+            console.log("search_q:" + searchq)
+            window.open("http://127.0.0.1:5000/search/" + searchq)
+        })
+    </script>
 
     <div class="row">
         {% for appname, file in filelist %}
@@ -84,7 +96,7 @@
                     <h4>{{ file }}</h4>
                     <p>some description</p>
                     <p class="center">
-                        <a href= {{appname + "/" + file}} class="btn btn-primary" role="button">Check</a>
+                        <a href={ {appname + "/" + file}} class="btn btn-primary" role="button">Check</a>
                         <a href="#" class="btn btn-default" role="button">Deep link</a>
                     </p>
                 </div>
