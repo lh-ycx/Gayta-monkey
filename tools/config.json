@@ -1,0 +1,15 @@
+{
+    "ADB_PATH": "D:/android/SDK/platform-tools/",
+    "DEFAULT_PORT": 5700,
+    "BACKEND": "UIAutomator",
+    "DEVICES": [
+        {
+            "IP": "127.0.0.1",
+            "SERIAL": "192.168.135.101:5555",
+            "PORT": 6161,
+            "PASSWORD": "monkeymonkey"
+        }
+    ],
+    "PACKAGE": "com.caishi.phoenix",
+    "TARGET_ACTIVITY": "LegacySubjectActivity"
+}
