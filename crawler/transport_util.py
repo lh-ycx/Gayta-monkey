@@ -54,7 +54,7 @@ def upload_dir(local, remote):
             for filespath in files:
                 local_file = os.path.join(root,filespath)
                 a = local_file.replace(local,'')
-                remote_file = os.path.join(remote_dir,a)
+                remote_file = os.path.join(remote,a)
                 try:
                     sftp.put(local_file,remote_file)
                 except Exception as e:
@@ -64,7 +64,7 @@ def upload_dir(local, remote):
             for name in dirs:
                 local_path = os.path.join(root,name)
                 a = local_path.replace(local,'')
-                remote_path = os.path.join(remote_dir,a)
+                remote_path = os.path.join(remote,a)
                 try:
                     sftp.mkdir(remote_path)
                     # print("mkdir path %s" % remote_path)
@@ -81,8 +81,8 @@ def upload_dir(local, remote):
 def upload_app(package_name):
     from util import logger
     logger.info('start uploading app %s\'s data', package_name)
-    upload_dir(local_dir + package_name + '/', remote_dir)
-    upload_dir(apk_dir + package_name + '/', remote_dir + 'coverage/')
+    upload_dir(local_dir + package_name + '/', remote_dir + package_name + '/')
+    upload_dir(apk_dir + package_name + '/', remote_dir + 'coverage/' + package_name + '/')
     logger.info('uploading app %s\'s data finished', package_name)
 
 
