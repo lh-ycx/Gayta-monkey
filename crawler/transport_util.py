@@ -81,8 +81,8 @@ def upload_dir(local, remote):
 def upload_app(package_name):
     from util import logger
     logger.info('start uploading app %s\'s data', package_name)
-    upload_dir(local_dir + package_name, remote_dir)
-    upload_dir(apk_dir + package_name, remote_dir + 'coverage/')
+    upload_dir(local_dir + package_name + '/', remote_dir)
+    upload_dir(apk_dir + package_name + '/', remote_dir + 'coverage/')
     logger.info('uploading app %s\'s data finished', package_name)
 
 
