@@ -21,10 +21,10 @@ import re
 import json
 
 # logger
-logger = logging.getLogger("")
-logger.setLevel(logging.DEBUG)
+logger = logging.getLogger("ycx")
+logger.setLevel(logging.INFO)
 fh = logging.FileHandler("spam.log")
-fh.setLevel(logging.DEBUG)
+fh.setLevel(logging.INFO)
 ch = logging.StreamHandler()
 ch.setLevel(logging.INFO)
 formatter = logging.Formatter(
