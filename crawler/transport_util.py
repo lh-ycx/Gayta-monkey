@@ -4,6 +4,7 @@ import requests
 import json
 
 from settings import apk_source
+from settings import apk_dir
 
 
 host = '162.105.175.241'
@@ -44,6 +45,7 @@ def download_file(remote, local = ''):
 
 # 上传文件夹
 def upload_dir(local, remote):
+    from util import logger
     try:
         transport = paramiko.Transport((host,port))
         transport.connect(username=username,password=password)
@@ -71,16 +73,23 @@ def upload_dir(local, remote):
         print('upload finish!')
         sftp.close()
     except Exception as e:
+        logger.error('error occurred when uploading dir %s to %s',local, remote)
         print(e)
             
 
 # 上传某个app的数据
 def upload_app(package_name):
+    from util import logger
+    logger.info('start uploading app %s\'s data', package_name)
     upload_dir(local_dir + package_name, remote_dir)
+    upload_dir(apk_dir + package_name, remote_dir + 'coverage/')
+    logger.info('uploading app %s\'s data finished', package_name)
 
 
 # 下载app
 def download_app():
+    from util import logger
+    logger.info('start downloading apks...')
     if apk_source == 'Google':
         response = requests.get('http://162.105.175.241:5000/GooglePlayApk/unfinished')
         # print(response.content.decode())
@@ -88,10 +97,23 @@ def download_app():
         # print(file_list)
         for f in file_list:
             try:
-                download_file(remote_apk_dir+f,f)
-                print("download finish with file: " + f)
+                download_file(remote_apk_dir+f,apk_dir+f)
+                logger.info("download finish with file: " + f)
                 # 在服务器端设置该app为finish状态
                 response = requests.get('http://162.105.175.241:5000/GooglePlayApk/finish/'+f)
+            except Exception as e:
+                print(e)
+    elif apk_source == 'WDJ':
+        response = requests.get('http://162.105.175.241:5000/WDJApk/unfinished')
+        # print(response.content.decode())
+        file_list = json.loads(response.content.decode())[:10]
+        # print(file_list)
+        for f in file_list:
+            try:
+                download_file(remote_apk_dir+f,apk_dir+f)
+                logger.info("download finish with file: " + f)
+                # 在服务器端设置该app为finish状态
+                response = requests.get('http://162.105.175.241:5000/WDJApk/finish/'+f)
             except Exception as e:
                 print(e)
         

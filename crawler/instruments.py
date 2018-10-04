@@ -140,7 +140,7 @@ class Paladin(BaseInstrument):
             config["PACKAGE"] = self.app.package        #package
             json.dump(config, open(config_path,'w'), indent = 4)
             print("paladin config complete, start testing...")
-            self.instance = RunCmd(['java', '-jar', 'paladin.jar'])
+            self.instance = RunCmd(['java', '-jar', 'paladin.jar', '-m'])
             self.instance.start_run()
         else:
             print("error! can not find config.json in :" + config_path)
