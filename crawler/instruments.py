@@ -105,7 +105,7 @@ class Paladin_s(BaseInstrument):
     def save_graph(self):
         result = os.popen("curl http://127.0.0.1:5700/save").read()
         package = self.app.package
-        old_dir = paladin_dir + "graph.json"
+        old_dir = paladin_dir + "graph-" + package + ".json"
         new_dir = paladin_dir + "output/" + package + "/graph-" + package + ".json"
         time.sleep(3)
         result = os.popen("mv " + old_dir + " " + new_dir).read()
@@ -169,7 +169,7 @@ class Paladin(BaseInstrument):
     def save_graph(self):
         result = os.popen("curl http://127.0.0.1:5700/save").read()
         package = self.app.package
-        old_dir = paladin_dir + "graph.json"
+        old_dir = paladin_dir + "graph-" + package + ".json"
         new_dir = paladin_dir + "output/" + package + "/graph-" + package + ".json"
         time.sleep(3)
         result = os.popen("mv " + old_dir + " " + new_dir).read()

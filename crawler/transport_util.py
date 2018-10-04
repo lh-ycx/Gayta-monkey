@@ -50,27 +50,27 @@ def upload_dir(local, remote):
         transport = paramiko.Transport((host,port))
         transport.connect(username=username,password=password)
         sftp = paramiko.SFTPClient.from_transport(transport)
-        for root, dirs, files in os.walk(local_dir):
+        for root, dirs, files in os.walk(local):
             for filespath in files:
                 local_file = os.path.join(root,filespath)
-                a = local_file.replace(local_dir,'')
+                a = local_file.replace(local,'')
                 remote_file = os.path.join(remote_dir,a)
                 try:
                     sftp.put(local_file,remote_file)
                 except Exception as e:
                     sftp.mkdir(os.path.split(remote_file)[0])
                     sftp.put(local_file,remote_file)
-                print(local_file + ' uploaded!')
+                # print(local_file + ' uploaded!')
             for name in dirs:
                 local_path = os.path.join(root,name)
-                a = local_path.replace(local_dir,'')
+                a = local_path.replace(local,'')
                 remote_path = os.path.join(remote_dir,a)
                 try:
                     sftp.mkdir(remote_path)
-                    print("mkdir path %s" % remote_path)
+                    # print("mkdir path %s" % remote_path)
                 except Exception as e:
                     print(e)
-        print('upload finish!')
+        # print('upload finish!')
         sftp.close()
     except Exception as e:
         logger.error('error occurred when uploading dir %s to %s',local, remote)
@@ -123,4 +123,5 @@ def download_app():
 if __name__ == "__main__" :
     #upload_file('spam.log', remote_dir+'spam.log')
     #upload_app('com.douban.movie')
-    download_app()
+    #download_app()
+    upload_app('com.baidu.news')

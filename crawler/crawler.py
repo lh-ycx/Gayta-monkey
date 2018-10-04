@@ -72,7 +72,7 @@ def crawl(subject, target):  # subject = App(apk, serial, suit)
 
 
 if __name__ == "__main__":
-    opts, args = getopt.getopt(sys.argv[1:], "s:t:hc")
+    opts, args = getopt.getopt(sys.argv[1:], "s:t:hcw")
     for op, value in opts:
         if op == "-c":
             spider_mode = True
