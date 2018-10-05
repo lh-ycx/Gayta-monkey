@@ -6,6 +6,6 @@ emma_dir = '/home/ubuntu-123456/Desktop/testAndroid/test_script/test/emma/emma.j
 #apk_dir = '/media/ubuntu-123456/DC062F9D062F77A2/compared_apk/selected/finished'
 paladin_dir = 'C:/Users/ycx/Desktop/test-paladin/'
 src_dir = "static/src/"
-apk_dir = 'C:/Users/ycx/Desktop/test-paladin/apks'
+apk_dir = 'C:/Users/ycx/Desktop/test-paladin/apks/'
 defaultsuit = 'paladin'
 elastic_url = 'http://127.0.0.1:9200/test/simpletree/_search'

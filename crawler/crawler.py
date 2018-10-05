@@ -8,6 +8,7 @@ import logging
 import timeout_decorator
 import time
 import requests
+import transport_util
 
 from util import error_msg
 from util import logger
@@ -20,14 +21,15 @@ from settings import is_open_source
 from Application import App
 from instruments import Paladin_s
 
-spider_mode = False
 
+spider_mode = False
+with_server = False
 
 suit = defaultsuit
 serial = ''
 
 
-@timeout_decorator.timeout(10800)
+@timeout_decorator.timeout(300)
 def test_coverage(subject, suit):
     os.system('adb -s ' + subject.serial + ' install ' + subject.apkpath)
     # subject = App(apk, serial, suit)
@@ -70,12 +72,15 @@ def crawl(subject, target):  # subject = App(apk, serial, suit)
 
 
 if __name__ == "__main__":
-    opts, args = getopt.getopt(sys.argv[1:], "s:t:hc")
+    opts, args = getopt.getopt(sys.argv[1:], "s:t:hcw")
     for op, value in opts:
         if op == "-c":
             spider_mode = True
             suit = 'paladin-s'
             logger.info('spider mode open')
+        elif op == '-w':
+            with_server = True
+            logger.info('start working with server')
         elif op == '-s':
             serial = value
             logger.info('read serial setting: ' + serial)
@@ -125,43 +130,93 @@ if __name__ == "__main__":
             crawl(subject, task['TARGET_ACTIVITY'])
 
     else:
-        # build task
-        output = os.popen('ls ' + apk_dir + ' -Sr').readlines()
-        tasks = [i.strip() for i in output]
-        if not tasks:
-            error_msg('can not find apk files in dir: ' + apk_dir)
+        if with_server:
+            while(True):
+                # download apks
+                transport_util.download_app()
 
-        # build finished
-        if (os.path.isfile(apk_dir + '/finished_' + suit + '.txt')):
-            f = open(apk_dir + '/finished_' + suit + '.txt', 'r')
-            content = f.read()
-            finished = content.split('\n')
-            f.close()
+                # build task
+                output = os.popen('ls ' + apk_dir + ' -Sr').readlines()
+                tasks = [i.strip() for i in output]
+                if not tasks:
+                    error_msg('can not find apk files in dir: ' + apk_dir)
+                
+                # build finished 
+                if (os.path.isfile(apk_dir + '/finished_' + suit + '.txt')):
+                    f = open(apk_dir + '/finished_' + suit + '.txt', 'r')
+                    content = f.read()
+                    finished = content.split('\n')
+                    f.close()
 
-        # run
-        for apk in tasks:
-            if apk[-3:] != 'apk':
-                continue
+                # run
+                for apk in tasks:
+                    if apk[-3:] != 'apk':
+                        continue
 
-            if apk in finished:
-                logger.info('skip finished task: ' + apk)
-                continue
+                    if apk in finished:
+                        logger.info('skip finished task: ' + apk)
+                        continue
 
-            logger.info('start testing ' + apk + ' using ' + suit)
-            subject = App(apk, serial, suit)
-            try:
-                test_coverage(subject, suit)
-            except timeout_decorator.timeout_decorator.TimeoutError as e:
-                if not is_open_source:
-                    fout = open(subject.dir + '/' +
-                                subject.package + '_coverage.txt', 'w+')
-                    fout.write(subject.package + ' ' + str(subject.activity_tot) +
-                               ' ' + str(subject.method_tot) + '\n')
-                    fout.close()
-                logger.info('task ' + apk + ' time out')
+                    logger.info('start testing ' + apk + ' using ' + suit)
+                    subject = App(apk, serial, suit)
+                    try:
+                        test_coverage(subject, suit)
+                    except timeout_decorator.timeout_decorator.TimeoutError as e:
+                        if not is_open_source:
+                            fout = open(subject.dir + '/' +
+                                        subject.package + '_coverage.txt', 'w+')
+                            fout.write(subject.package + ' ' + str(subject.activity_tot) +
+                                    ' ' + str(subject.method_tot) + '\n')
+                            fout.close()
+                        logger.info('task ' + apk + ' time out')
 
-            os.system('adb -s ' + subject.serial +
-                      ' uninstall ' + subject.package)
-            f = open(apk_dir + '/finished_' + suit + '.txt', 'a+')
-            f.write(subject.package + '\n')
-            f.close()
+
+                    os.system('adb -s ' + subject.serial +
+                            ' uninstall ' + subject.package)
+                    os.system('rm ' + apk_dir + apk)
+                    transport_util.upload_app(subject.package)
+                    os.system('rm -r output/' + subject.package + '/')
+                    f = open(apk_dir + '/finished_' + suit + '.txt', 'a+')
+                    f.write(subject.package + '\n')
+                    f.close()
+        else:
+            # build task
+            output = os.popen('ls ' + apk_dir + ' -Sr').readlines()
+            tasks = [i.strip() for i in output]
+            if not tasks:
+                error_msg('can not find apk files in dir: ' + apk_dir)
+
+            # build finished
+            if (os.path.isfile(apk_dir + '/finished_' + suit + '.txt')):
+                f = open(apk_dir + '/finished_' + suit + '.txt', 'r')
+                content = f.read()
+                finished = content.split('\n')
+                f.close()
+
+            # run
+            for apk in tasks:
+                if apk[-3:] != 'apk':
+                    continue
+
+                if apk in finished:
+                    logger.info('skip finished task: ' + apk)
+                    continue
+
+                logger.info('start testing ' + apk + ' using ' + suit)
+                subject = App(apk, serial, suit)
+                try:
+                    test_coverage(subject, suit)
+                except timeout_decorator.timeout_decorator.TimeoutError as e:
+                    if not is_open_source:
+                        fout = open(subject.dir + '/' +
+                                    subject.package + '_coverage.txt', 'w+')
+                        fout.write(subject.package + ' ' + str(subject.activity_tot) +
+                                ' ' + str(subject.method_tot) + '\n')
+                        fout.close()
+                    logger.info('task ' + apk + ' time out')
+
+                os.system('adb -s ' + subject.serial +
+                        ' uninstall ' + subject.package)
+                f = open(apk_dir + '/finished_' + suit + '.txt', 'a+')
+                f.write(subject.package + '\n')
+                f.close()

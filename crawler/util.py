@@ -21,12 +21,12 @@ import re
 import json
 
 # logger
-logger = logging.getLogger("")
-logger.setLevel(logging.DEBUG)
+logger = logging.getLogger("ycx")
+logger.setLevel(logging.INFO)
 fh = logging.FileHandler("spam.log")
-fh.setLevel(logging.DEBUG)
+fh.setLevel(logging.INFO)
 ch = logging.StreamHandler()
-ch.setLevel(logging.INFO)
+ch.setLevel(logging.DEBUG)
 formatter = logging.Formatter(
     '[%(asctime)s] [%(levelname)s] %(message)s', '%Y-%m-%d %H:%M:%S')
 ch.setFormatter(formatter)

@@ -107,7 +107,7 @@ class Paladin_s(BaseInstrument):
     def save_graph(self):
         result = os.popen("curl http://127.0.0.1:" + paladin_port + "/save").read()
         package = self.app.package
-        old_dir = paladin_dir + "graph.json"
+        old_dir = paladin_dir + "graph-" + package + ".json"
         new_dir = paladin_dir + "output/" + package + "/graph-" + package + ".json"
         time.sleep(3)
         result = os.popen("mv " + old_dir + " " + new_dir).read()
@@ -116,8 +116,9 @@ class Paladin_s(BaseInstrument):
     def clean(self):
         # stop()会调用clean()
         # print("clean!!")
-        graph_dir = paladin_dir + "graph.json"
-        stacks_dir = paladin_dir + "stacks.json"
+        package = self.app.package
+        graph_dir = paladin_dir + "graph-" + package + ".json"
+        stacks_dir = paladin_dir + "stacks-" + package + ".json"
         result = os.popen("rm -f " + graph_dir).read()
         result = os.popen("rm -f " + stacks_dir).read()
         
@@ -143,7 +144,7 @@ class Paladin(BaseInstrument):
             config["DEFAULT_PORT"] = paladin_port               # 与paladin.jar交互的端口号
             json.dump(config, open(config_path,'w'), indent = 4)
             print("paladin config complete, start testing...")
-            self.instance = RunCmd(['java', '-jar', 'paladin.jar'])
+            self.instance = RunCmd(['java', '-jar', 'paladin.jar', '-m'])
             self.instance.start_run()
         else:
             print("error! can not find config.json in :" + config_path)
@@ -172,7 +173,7 @@ class Paladin(BaseInstrument):
     def save_graph(self):
         result = os.popen("curl http://127.0.0.1:" + paladin_port + "/save").read()
         package = self.app.package
-        old_dir = paladin_dir + "graph.json"
+        old_dir = paladin_dir + "graph-" + package + ".json"
         new_dir = paladin_dir + "output/" + package + "/graph-" + package + ".json"
         time.sleep(3)
         result = os.popen("mv " + old_dir + " " + new_dir).read()
@@ -181,8 +182,9 @@ class Paladin(BaseInstrument):
     def clean(self):
         #stop()会调用clean()
         print("clean!!")
-        graph_dir = paladin_dir + "graph.json"
-        stacks_dir = paladin_dir + "stacks.json"
+        package = self.app.package
+        graph_dir = paladin_dir + "graph-" + package + ".json"
+        stacks_dir = paladin_dir + "stacks-" + package + ".json"
         result = os.popen("rm -f " + graph_dir).read()
         result = os.popen("rm -f " + stacks_dir).read()
 

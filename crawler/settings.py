@@ -5,8 +5,12 @@ emma_dir = '/home/ubuntu-123456/Desktop/testAndroid/test_script/test/emma/emma.j
 #apk_dir = '/home/ubuntu-123456/Desktop/testAndroid/test_script/apks'
 #apk_dir = '/media/ubuntu-123456/DC062F9D062F77A2/compared_apk/selected/finished'
 src_dir = "static/src/"
-paladin_dir = 'C:/Users/ycx/Desktop/test-paladin/'
-apk_dir = 'C:/Users/ycx/Desktop/test-paladin/apks'
+paladin_dir = './'
+apk_dir = './apks/'
 defaultsuit = 'paladin'
 elastic_url = 'http://localhost:9200/test/simpletree'
+<<<<<<< HEAD
 paladin_port = 5700     # 如果要多开，只需要修改这里
+=======
+apk_source = 'Google'
+>>>>>>> 0d6fe57cd1b81425544f1a21ffdcab04f09291ed
