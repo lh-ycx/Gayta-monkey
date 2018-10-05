@@ -108,14 +108,14 @@ class Paladin_s(BaseInstrument):
     
     def is_alive(self):
         serial = self.app.serial
-        result = os.popen("curl http://127.0.0.1:" +  paladin_port + "/finish?serial="+serial).read()
+        result = os.popen("curl http://127.0.0.1:" +  str(paladin_port) + "/finish?serial="+serial).read()
         #print('======================')
         #print("result:",result)
         #print('======================')
         return result == 'no'
 
     def save_graph(self):
-        result = os.popen("curl http://127.0.0.1:" + paladin_port + "/save").read()
+        result = os.popen("curl http://127.0.0.1:" + str(paladin_port) + "/save").read()
         package = self.app.package
         old_dir = paladin_dir + "graph-" + package + ".json"
         new_dir = paladin_dir + "output/" + package + "/graph-" + package + ".json"
@@ -169,7 +169,7 @@ class Paladin(BaseInstrument):
 
     def is_alive(self):
         serial = self.app.serial
-        result = os.popen("curl http://127.0.0.1:" + paladin_port  + "/finish?serial="+serial).read()
+        result = os.popen("curl http://127.0.0.1:" + str(paladin_port)  + "/finish?serial="+serial).read()
         return result == 'no'
         # 以前的设计
         #rp = requests.get(self.ip + '/finish')
@@ -182,7 +182,7 @@ class Paladin(BaseInstrument):
         # 增加一个接口提供询问服务
 
     def save_graph(self):
-        result = os.popen("curl http://127.0.0.1:" + paladin_port + "/save").read()
+        result = os.popen("curl http://127.0.0.1:" + str(paladin_port) + "/save").read()
         package = self.app.package
         old_dir = paladin_dir + "graph-" + package + ".json"
         new_dir = paladin_dir + "output/" + package + "/graph-" + package + ".json"
