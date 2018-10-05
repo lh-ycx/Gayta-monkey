@@ -9,5 +9,8 @@ paladin_dir = './'
 apk_dir = './apks/'
 defaultsuit = 'paladin'
 elastic_url = 'http://localhost:9200/test/simpletree'
-paladin_port = 5700     # 如果要多开，只需要修改这里
 apk_source = 'Google'
+
+# 如果要多开，需要修改这里
+paladin_port = 5700     
+web_retriever_port = 9229

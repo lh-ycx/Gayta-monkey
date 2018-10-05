@@ -18,8 +18,10 @@ from util import handle_page
 from settings import paladin_dir, apk_dir
 from settings import defaultsuit
 from settings import is_open_source
+from settings import web_retriever_port
 from Application import App
 from instruments import Paladin_s
+from instruments import RunCmd
 
 
 spider_mode = False
@@ -93,6 +95,11 @@ if __name__ == "__main__":
         else:
             usage()
             sys.exit()
+
+    # start web retriever
+    logger.info("start web retriever, lestining on port: " + web_retriever_port)
+    self.web_retriever = RunCmd(['node','ui.main.js','--serial',serial,'--server-port',web_retriever_port,'--output','../output/'])
+    
 
     tasks = []
     finished = []
