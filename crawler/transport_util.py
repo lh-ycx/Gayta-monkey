@@ -96,11 +96,12 @@ def download_app():
         file_list = json.loads(response.content.decode())[:10]
         # print(file_list)
         for f in file_list:
+            # 在服务器端设置该app为finish状态
+            response = requests.get('http://162.105.175.241:5000/GooglePlayApk/finish/'+f)
+        for f in file_list:
             try:
                 download_file(remote_apk_dir+f,apk_dir+f)
                 logger.info("download finish with file: " + f)
-                # 在服务器端设置该app为finish状态
-                response = requests.get('http://162.105.175.241:5000/GooglePlayApk/finish/'+f)
             except Exception as e:
                 print(e)
     elif apk_source == 'WDJ':
@@ -109,11 +110,12 @@ def download_app():
         file_list = json.loads(response.content.decode())[:10]
         # print(file_list)
         for f in file_list:
+            # 在服务器端设置该app为finish状态
+            response = requests.get('http://162.105.175.241:5000/WDJApk/finish/'+f)
+        for f in file_list:
             try:
                 download_file(remote_apk_dir+f,apk_dir+f)
                 logger.info("download finish with file: " + f)
-                # 在服务器端设置该app为finish状态
-                response = requests.get('http://162.105.175.241:5000/WDJApk/finish/'+f)
             except Exception as e:
                 print(e)
         
