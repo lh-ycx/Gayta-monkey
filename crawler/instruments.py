@@ -114,6 +114,7 @@ class Paladin_s(BaseInstrument):
     def clean(self):
         # stop()会调用clean()
         # print("clean!!")
+        package = self.app.package
         graph_dir = paladin_dir + "graph-" + package + ".json"
         stacks_dir = paladin_dir + "stacks-" + package + ".json"
         result = os.popen("rm -f " + graph_dir).read()
@@ -178,6 +179,7 @@ class Paladin(BaseInstrument):
     def clean(self):
         #stop()会调用clean()
         print("clean!!")
+        package = self.app.package
         graph_dir = paladin_dir + "graph-" + package + ".json"
         stacks_dir = paladin_dir + "stacks-" + package + ".json"
         result = os.popen("rm -f " + graph_dir).read()

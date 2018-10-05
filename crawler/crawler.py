@@ -175,6 +175,7 @@ if __name__ == "__main__":
                             ' uninstall ' + subject.package)
                     os.system('rm ' + apk_dir + apk)
                     transport_util.upload_app(subject.package)
+                    os.system('rm -r output/' + subject.package + '/')
                     f = open(apk_dir + '/finished_' + suit + '.txt', 'a+')
                     f.write(subject.package + '\n')
                     f.close()
