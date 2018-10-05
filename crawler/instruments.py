@@ -12,7 +12,7 @@ from Application import getHostPid
 from settings import apk_dir
 from settings import paladin_dir
 from settings import paladin_port
-from settings import web_retriver_port
+from settings import web_retriever_port
 
 class RunCmd(threading.Thread):
     def __init__(self, cmd):
@@ -94,7 +94,7 @@ class Paladin_s(BaseInstrument):
             config["PACKAGE"] = self.app.package                #package
             config["TARGET_ACTIVITY"] = self.target_activity
             config["DEFAULT_PORT"] = paladin_port               # 与paladin.jar交互的端口号
-            config["WEB_RETRIEVER_PORT"] = web_retriver_port
+            config["WEB_RETRIEVER_PORT"] = web_retriever_port
             json.dump(config, open(config_path,'w'), indent = 4)
             logger.info("paladin-s config complete, start testing...")
             self.instance = RunCmd(['java', '-jar', 'paladin-1.0.jar','-s'])
@@ -152,7 +152,7 @@ class Paladin(BaseInstrument):
             config["DEVICES"][0]["SERIAL"] = self.app.serial    #序列号
             config["PACKAGE"] = self.app.package                #package
             config["DEFAULT_PORT"] = paladin_port               # 与paladin.jar交互的端口号
-            config["WEB_RETRIEVER_PORT"] = web_retriver_port
+            config["WEB_RETRIEVER_PORT"] = web_retriever_port
             json.dump(config, open(config_path,'w'), indent = 4)
             print("paladin config complete, start testing...")
             self.instance = RunCmd(['java', '-jar', 'paladin.jar', '-m'])

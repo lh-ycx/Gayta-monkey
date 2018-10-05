@@ -97,12 +97,12 @@ if __name__ == "__main__":
             sys.exit()
 
     # start web retriever
-    logger.info("start web retriever, lestining on port: " + web_retriever_port)
-    web_retriever_log = open("web_log","a")
-    self.web_retriever = RunCmd(['node','web\ retriever/ui/main.js','--serial',serial,'--server-port',web_retriever_port,'--output','./output/'])
-    self.web_retriever.set_stdout(web_retriever_log)
-    self.web_retriever.set_stderr(web_retriever_log)
-    self.web_retriever.start_run()
+    logger.info("start web retriever, lestining on port: " + str(web_retriever_port))
+    web_retriever_log = open("web.log","a")
+    web_retriever = RunCmd(['node','web retriever/ui/main.js','--serial',serial,'--server-port',str(web_retriever_port),'--output','./output/'])
+    web_retriever.set_stdout(web_retriever_log)
+    web_retriever.set_stderr(web_retriever_log)
+    web_retriever.start_run()
 
     tasks = []
     finished = []
