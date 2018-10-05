@@ -11,6 +11,7 @@ from Application import getPid
 from Application import getHostPid
 from settings import apk_dir
 from settings import paladin_dir
+from settings import paladin_port
 
 class RunCmd(threading.Thread):
     def __init__(self, cmd):
@@ -83,6 +84,7 @@ class Paladin_s(BaseInstrument):
             config["DEVICES"][0]["SERIAL"] = self.app.serial    #序列号
             config["PACKAGE"] = self.app.package                #package
             config["TARGET_ACTIVITY"] = self.target_activity
+            config["DEFAULT_PORT"] = paladin_port               # 与paladin.jar交互的端口号
             json.dump(config, open(config_path,'w'), indent = 4)
             logger.info("paladin-s config complete, start testing...")
             self.instance = RunCmd(['java', '-jar', 'paladin-1.0.jar','-s'])
@@ -96,14 +98,14 @@ class Paladin_s(BaseInstrument):
     
     def is_alive(self):
         serial = self.app.serial
-        result = os.popen("curl http://127.0.0.1:5700/finish?serial="+serial).read()
+        result = os.popen("curl http://127.0.0.1:" +  paladin_port + "/finish?serial="+serial).read()
         #print('======================')
         #print("result:",result)
         #print('======================')
         return result == 'no'
 
     def save_graph(self):
-        result = os.popen("curl http://127.0.0.1:5700/save").read()
+        result = os.popen("curl http://127.0.0.1:" + paladin_port + "/save").read()
         package = self.app.package
         old_dir = paladin_dir + "graph.json"
         new_dir = paladin_dir + "output/" + package + "/graph-" + package + ".json"
@@ -136,8 +138,9 @@ class Paladin(BaseInstrument):
         config_path = self.wd + 'config.json'
         if(os.path.isfile(config_path)) :
             config = json.load(open(config_path))
-            config["DEVICES"][0]["SERIAL"] = self.app.serial   #序列号
-            config["PACKAGE"] = self.app.package        #package
+            config["DEVICES"][0]["SERIAL"] = self.app.serial    #序列号
+            config["PACKAGE"] = self.app.package                #package
+            config["DEFAULT_PORT"] = paladin_port               # 与paladin.jar交互的端口号
             json.dump(config, open(config_path,'w'), indent = 4)
             print("paladin config complete, start testing...")
             self.instance = RunCmd(['java', '-jar', 'paladin.jar'])
@@ -154,7 +157,7 @@ class Paladin(BaseInstrument):
 
     def is_alive(self):
         serial = self.app.serial
-        result = os.popen("curl http://127.0.0.1:5700/finish?serial="+serial).read()
+        result = os.popen("curl http://127.0.0.1:" + paladin_port  + "/finish?serial="+serial).read()
         return result == 'no'
         # 以前的设计
         #rp = requests.get(self.ip + '/finish')
@@ -167,7 +170,7 @@ class Paladin(BaseInstrument):
         # 增加一个接口提供询问服务
 
     def save_graph(self):
-        result = os.popen("curl http://127.0.0.1:5700/save").read()
+        result = os.popen("curl http://127.0.0.1:" + paladin_port + "/save").read()
         package = self.app.package
         old_dir = paladin_dir + "graph.json"
         new_dir = paladin_dir + "output/" + package + "/graph-" + package + ".json"

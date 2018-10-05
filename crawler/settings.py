@@ -9,3 +9,4 @@ paladin_dir = 'C:/Users/ycx/Desktop/test-paladin/'
 apk_dir = 'C:/Users/ycx/Desktop/test-paladin/apks'
 defaultsuit = 'paladin'
 elastic_url = 'http://localhost:9200/test/simpletree'
+paladin_port = 5700     # 如果要多开，只需要修改这里
