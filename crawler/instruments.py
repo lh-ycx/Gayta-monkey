@@ -18,9 +18,17 @@ class RunCmd(threading.Thread):
     def __init__(self, cmd):
         threading.Thread.__init__(self)
         self.cmd = cmd
+        self.stdout = sub.DEVNULL
+        self.stderr = sub.DEVNULL
 
+    def set_stdout(self, stdout):
+        self.stdout = stdout
+    
+    def set_stderr(self, stderr):
+        self.stderr = stderr
+    
     def run(self):
-        self.p = sub.Popen(self.cmd, stdout=sub.DEVNULL, stderr=sub.DEVNULL)
+        self.p = sub.Popen(self.cmd, stdout=self.stdout, stderr=self.stderr)
         #self.p = sub.Popen(self.cmd)
         self.p.wait()
 
