@@ -13,4 +13,5 @@ apk_source = 'Google'
 
 # 如果要多开，需要修改这里
 paladin_port = 5700     
-web_retriever_port = 9229
+web_retriever_port = 9292
+web_forward_port = 9222
