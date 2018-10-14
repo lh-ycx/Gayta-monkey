@@ -18,7 +18,7 @@ from util import handle_page
 from settings import paladin_dir, apk_dir
 from settings import defaultsuit
 from settings import is_open_source
-from settings import web_retriever_port
+from settings import web_retriever_port,web_forward_port
 from Application import App
 from instruments import Paladin_s
 from instruments import RunCmd
@@ -31,7 +31,7 @@ suit = defaultsuit
 serial = ''
 
 
-@timeout_decorator.timeout(300)
+@timeout_decorator.timeout(1800)
 def test_coverage(subject, suit):
     os.system('adb -s ' + subject.serial + ' install ' + subject.apkpath)
     # subject = App(apk, serial, suit)
@@ -99,7 +99,7 @@ if __name__ == "__main__":
     # start web retriever
     logger.info("start web retriever, lestining on port: " + str(web_retriever_port))
     web_retriever_log = open("web.log","a")
-    web_retriever = RunCmd(['node','web retriever/ui/main.js','--serial',serial,'--server-port',str(web_retriever_port),'--output','./output/'])
+    web_retriever = RunCmd(['node','web retriever/ui/main.js','--serial',serial,'--forward-port',str(web_forward_port),'--server-port',str(web_retriever_port),'--output','./output/'])
     web_retriever.set_stdout(web_retriever_log)
     web_retriever.set_stderr(web_retriever_log)
     web_retriever.start_run()
