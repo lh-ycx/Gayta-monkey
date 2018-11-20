@@ -1,4 +1,4 @@
-# coding=utf-8
+#-*- coding:utf-8 -*-
 
 import os
 import re
@@ -39,7 +39,7 @@ class App():
         return package
     
     def getLaunchActivity(self):
-        info = os.popen('aapt d badging ' + self.apkpath + ' | grep launchable').read()
+        info = os.popen('aapt d badging ' + self.apkpath + ' | grep launchable').read().decode()
         match = re.search("(launchable-activity: name=')(.*)", info)
         if (match != None):
             launch = match.group(2).split()[0][:-1]
