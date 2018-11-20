@@ -127,7 +127,7 @@ def download_old_app():
     if apk_source == 'Google':
         response = requests.get('http://162.105.175.241:5000/GooglePlayApk/unanalysised')
         # print(response.content.decode())
-        file_list = json.loads(response.content.decode())[:10]
+        file_list = json.loads(response.content.decode())[:1]
         # print(file_list)
         for f in file_list:
             # 在服务器端设置该app为analysis状态
@@ -141,7 +141,7 @@ def download_old_app():
     elif apk_source == 'WDJ':
         response = requests.get('http://162.105.175.241:5000/WDJApk/unanalysised')
         # print(response.content.decode())
-        file_list = json.loads(response.content.decode())[:10]
+        file_list = json.loads(response.content.decode())[:1]
         # print(file_list)
         for f in file_list:
             # 在服务器端设置该app为finish状态
