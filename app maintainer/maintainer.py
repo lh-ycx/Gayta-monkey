@@ -5,6 +5,10 @@ update in 2018/11/19
 增加两个文件：
 Google(WDJ)_unanalysis.txt: 还没有被分析的app
 Google(WDJ)_analysis.txt:   分析过的app
+
+--- ver 1.2 ---
+update in 2018/12/1
+现在会按照排名顺序返回apk名
 '''
 
 
@@ -22,7 +26,8 @@ def hello_world():
 @app.route('/GooglePlayApk/unfinished')
 def Google_unfinished():
     # file_list = os.listdir('GooglePlayApk')
-    f = open("GooglePlayWebview.json",'r')
+    # f = open("GooglePlayWebview.json",'r')
+    f = open("GooglePlayRanked.txt",'r')
     file_list = json.load(f)
     f.close()
 
@@ -93,7 +98,8 @@ def Google_finish(apk_name):
 @app.route('/WDJApk/unfinished')
 def WDJ_unfinished():
     # file_list = os.listdir('WDJApk')
-    f = open("WDJWebview.json",'r')
+    # f = open("WDJWebview.json",'r')
+    f = open("WDJRanked.txt",'r')
     file_list = json.load(f)
     f.close()
     
